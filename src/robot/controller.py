@@ -42,6 +42,7 @@ pid = PID(Kp, Ki, Kd, setpoint)
 value = setpoint
 
 while True:
+    time.sleep(DT)
     readPID(Kp, Ki, Kd)
     pid.tunnings = (Kp, Ki, Kd)
     try:
@@ -53,5 +54,4 @@ while True:
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
     print output
-    time.sleep(DT)
     
