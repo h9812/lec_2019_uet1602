@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "name": "self-balanced-car-server",
+  "version": "1.0.0",
+  "description": "Xe tu can bang server",
+  "main": "index.js",
+  "author": "Pham Ngoc Duy",
+  "license": "MIT"
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bảng điều khiển</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/ui.js"></script>
+</head>
+
+<body onload="onload()">
+    <div id="camera-view">
+        <img id="camera-image" />
+    </div>
+
+    <div id="tab-container">
+        <button id="route-tabbtn" class="button-bar button-BR tabbtn" tab="route" onclick="openTab(this, 'route')">Đặt
+            lộ
+            trình</button>
+        <button id="config-tabbtn" class="button-bar button-BR tabbtn" tab="route" onclick="openTab(this, 'config')">Cấu
+            hình</button>
+    </div>
+    <div id="route" class="tabcontent">
+        <textarea id="route-textarea" class="route-input" disabled></textarea><br />
+        <button id="run-btn" onclick="runRoute()" class="button-bar-mini button-SELECT">CHẠY</button>
+        <button id="stop-btn" onclick="stopRoute()" class="button-bar-mini button-SELECT">DỪNG</button>
+        <button id="clear-btn" onclick="inputClear()" class="button-bar-mini button-SELECT">XOÁ</button>
+    </div>
+    <div id="config" class="tabcontent">
+        <div class="value-group">
+            <button id="p-minus-btn" onclick="configAdd('p')" class="value-group-btn">+</button>
+            <span class="value-group-span">P: <span id="p-value">1</span></span>
+            <button id="p-add-btn" onclick="configMinus('p')" class="value-group-btn">-</button>
+        </div>
+        <div class="value-group">
+            <button id="i-minus-btn" onclick="configAdd('i')" class="value-group-btn">+</button>
+            <span class="value-group-span">I: <span id="i-value">2</span> </span>
+            <button id="i-add-btn" onclick="configMinus('i')" class="value-group-btn">-</button>
+
+        </div>
+        <div class="value-group">
+            <button id="d-minus-btn" onclick="configAdd('d')" class="value-group-btn">+</button>
+            <span class="value-group-span">D: <span id="d-value">3</span> </span>
+            <button id="d-add-btn" onclick="configMinus('d')" class="value-group-btn">-</button>
+        </div>
+
+    </div>
+    <div id="ctrl-btn-group">
+        <button keyCode="65" class="button-circle button-U control-btn">W</button>
+        <br />
+        <button keyCode="83" class="button-circle button-L control-btn">A</button>
+        <button keyCode="68" class="button-circle button-D control-btn">S</button>
+        <button keyCode="87" class="button-circle button-R control-btn">D</button>
+    </div>
+    <div id="ping-group"> </div>
+    <button id="ping-btn" onclick="pingRes()" class="button-bar-mini button-SELECT">PING ROBOT</button>
+    <button id="ping-btn" onclick="turnOnCam(true)" class="button-bar-mini button-SELECT">BẬT CAMERA</button>
+    <button id="ping-btn" onclick="turnOnCam(false)" class="button-bar-mini button-SELECT">TẮT CAMERA</button>
+</body>
+
+</html>
