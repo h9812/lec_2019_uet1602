@@ -1,34 +1,16 @@
-#define MOTOR_EN_1_2  10
-#define MOTOR_IN1     9
-#define MOTOR_IN2     8
+#include <LiquidCrystal_I2C.h>
 
-#define MOTOR_EN_3_4  6
-#define MOTOR_IN3     5
-#define MOTOR_IN4     4
-
-void move(int speed) {
-  if(speed > 0) {
-    analogWrite(MOTOR_EN_1_2, speed);
-    digitalWrite(MOTOR_IN1, HIGH);
-    digitalWrite(MOTOR_IN2, LOW);
-    analogWrite(MOTOR_EN_3_4, speed);
-    digitalWrite(MOTOR_IN3, HIGH);
-    digitalWrite(MOTOR_IN4, LOW);
-  } else {
-    analogWrite(MOTOR_EN_1_2, -speed);
-    digitalWrite(MOTOR_IN1, LOW);
-    digitalWrite(MOTOR_IN2, HIGH);
-    analogWrite(MOTOR_EN_3_4, -speed);
-    digitalWrite(MOTOR_IN3, LOW);
-    digitalWrite(MOTOR_IN4, HIGH);
-  }
-}
+LiquidCrystal_I2C lcd(0x27,16,2);
 
 void setup() {
-    Serial.begin(9600);
+  Serial.begin(9600);
+  lcd.begin();
+  lcd.backlight();
 }
-
+ 
 void loop() {
-    int number = Serial.parseInt();
-    move(number);
+  int number = Serial.parseInt();
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(number);
 }
