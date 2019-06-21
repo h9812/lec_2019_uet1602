@@ -32,9 +32,9 @@ axisOffset = array('i', [])
 magum = Magum(250, 1, 2, 1)
 
 axisOffset = magum.calibrateSens(1000)
-DT = 0.3
+DT = 0.1
 
-Kp = 20.0
+Kp = 50.0
 Ki = 0.0
 Kd = 0.0
 setpoint = 90.0
@@ -50,7 +50,7 @@ while True:
     except IOError:
         pass
     output = pid(int(round(cFAngleAxis[2],0)))
-    output = constrain(output, 120, 255)
+    output = constrain(output, 140, 255)
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
     print output
