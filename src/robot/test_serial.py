@@ -1,7 +1,7 @@
 import serial
 import time
 
-ser = serial.Serial('COM4', 9600, timeout=0)
+ser = serial.Serial('/dev/ttyMCC', 9600, timeout=0)
 o1 = 120
 o2 = 240
 while True:
