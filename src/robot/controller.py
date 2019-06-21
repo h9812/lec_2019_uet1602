@@ -37,7 +37,7 @@ DT = 0.3
 Kp = 20.0
 Ki = 0.0
 Kd = 0.0
-setpoint = 0.0
+setpoint = 90.0
 pid = PID(Kp, Ki, Kd, setpoint)
 value = setpoint
  
@@ -49,8 +49,8 @@ while True:
         cFAngleAxis = magum.compFilter(DT, axisOffset)
     except IOError:
         pass
-    output = pid(int(round(cFAngleAxis[0],0)))
-    output = constrain(output, 180, 255)
+    output = pid(int(round(cFAngleAxis[2],0)))
+    output = constrain(output, 120, 255)
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
     print output
