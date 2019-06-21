@@ -16,12 +16,17 @@ def readPID(Kp, Ki, Kd):
     except IOError:
         pass
 
-def constrain(x, a, b):
-    if(a <= x and x <= b):
-        return x
+def constrain(x, a, b, c, d):
     if(x < a):
         return a
-    return b
+    if(x > d):
+        return d
+    if(b < x and x < c):
+        if((x - b) > (c - x)):
+            return c
+        return b
+    return x
+    
 
 ser = serial.Serial('/dev/ttyMCC', 9600, timeout=0)
 
@@ -34,7 +39,7 @@ magum = Magum(250, 1, 2, 1)
 axisOffset = magum.calibrateSens(1000)
 DT = 0.1
 
-Kp = 50.0
+Kp = 20.0
 Ki = 0.0
 Kd = 0.0
 setpoint = 0.0
@@ -50,7 +55,7 @@ while True:
     except IOError:
         pass
     output = pid(int(round(cFAngleAxis[0],0)))
-    output = constrain(output, 140, 255)
+    if
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
     print output
