@@ -34,7 +34,7 @@ magum = Magum(250, 1, 2, 1)
 axisOffset = magum.calibrateSens(1000)
 DT = 0.3
 
-Kp = 1.0
+Kp = 20.0
 Ki = 0.0
 Kd = 0.0
 setpoint = 0.0
