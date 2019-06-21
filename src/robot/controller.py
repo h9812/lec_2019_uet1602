@@ -55,7 +55,7 @@ while True:
     except IOError:
         pass
     output = pid(int(round(cFAngleAxis[0],0)))
-    if
+    output = constrain(output, -255, -180, 180, 255)
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
     print output
