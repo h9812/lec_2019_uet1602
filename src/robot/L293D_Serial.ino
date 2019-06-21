@@ -2,9 +2,9 @@
 #define MOTOR_IN1     9
 #define MOTOR_IN2     8
 
-#define MOTOR_EN_3_4  7
-#define MOTOR_IN3     6
-#define MOTOR_IN4     5
+#define MOTOR_EN_3_4  6
+#define MOTOR_IN3     5
+#define MOTOR_IN4     3
 
 #define slow 64
 #define normal 128
