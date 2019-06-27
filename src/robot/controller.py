@@ -16,15 +16,12 @@ def readPID(Kp, Ki, Kd):
     except IOError:
         pass
 
-def constrain(x, a, b, c, d):
-    if(x < a):
-        return a
-    if(x > d):
-        return d
-    if(b < x and x < c):
-        if((x - b) > (c - x)):
-            return c
-        return b
+def constrain(x):
+    if(x < -255):
+        return -255
+    if(x > 255):
+        return 255
+    
     return x
     
 
@@ -36,13 +33,13 @@ axisOffset = array('i', [])
 # A_scaleRange = 2, lnoise = 1 (on)
 magum = Magum(250, 1, 2, 1)
 
-axisOffset = magum.calibrateSens(1000)
+axisOffset = magum.calibrateSens(40)
 DT = 0.1
 
-Kp = 20.0
-Ki = 0.0
+Kp = 40.0
+Ki = 1.0
 Kd = 0.0
-setpoint = 0.0
+setpoint = 180.0
 pid = PID(Kp, Ki, Kd, setpoint)
 value = setpoint
  
@@ -54,8 +51,8 @@ while True:
         cFAngleAxis = magum.compFilter(DT, axisOffset)
     except IOError:
         pass
-    output = pid(int(round(cFAngleAxis[0],0)))
-    output = constrain(output, -255, -180, 180, 255)
+    output = pid(int(cFAngleAxis[2]))
+    output = constrain(output)
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
     print output
