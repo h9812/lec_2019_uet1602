@@ -25,7 +25,7 @@ def constrain(x):
     return x
     
 
-ser = serial.Serial('/dev/ttyMCC', 9600, timeout=0)
+ser = serial.Serial('/dev/ttyMCC', 115200, timeout=0)
 
 axisOffset = array('i', [])
 
@@ -33,25 +33,26 @@ axisOffset = array('i', [])
 # A_scaleRange = 2, lnoise = 1 (on)
 magum = Magum(250, 1, 2, 1)
 
-axisOffset = magum.calibrateSens(40)
+axisOffset = magum.calibrateSens(1000)
 DT = 0.1
 
-Kp = 40.0
-Ki = 1.0
+Kp = 1.0
+Ki = 0.0
 Kd = 0.0
-setpoint = 180.0
+setpoint = 90.0
 pid = PID(Kp, Ki, Kd, setpoint)
 value = setpoint
+pid.tunnings = (Kp, Ki, Kd)
  
 while True:
     time.sleep(DT)
-    readPID(Kp, Ki, Kd)
-    pid.tunnings = (Kp, Ki, Kd)
+    #readPID(Kp, Ki, Kd)
+    #pid.tunnings = (Kp, Ki, Kd)
     try:
         cFAngleAxis = magum.compFilter(DT, axisOffset)
     except IOError:
         pass
-    output = pid(int(cFAngleAxis[2]))
+    output = pid(int(cFAngleAxis[2]+cFAngleAxis[0]))
     output = constrain(output)
     ser.write((str(output)+'\r\n').encode())
     print str(int(round(cFAngleAxis[0],0))) + ',' + str(int(round(cFAngleAxis[1],0))) + ',' + str(int(round(cFAngleAxis[2],0)))
