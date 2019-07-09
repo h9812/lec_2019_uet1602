@@ -7,8 +7,7 @@ sudo apt-get install python3
 pip install pyserial
 sudo apt-get install build-essential libi2c-dev i2c-tools python-dev libffi-dev
 
-pip install cffi
-pip install smbus-cffi
+pip install cffi & pip install smbus-cffi
 
 sudo apt-get install git
 git clone https://github.com/ubalance-team/magum.git 
