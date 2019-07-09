@@ -16,3 +16,6 @@ git clone https://github.com/ubalance-team/magum.git
 Now navigate in the folder where you (or git) downloaded the repository with the terminal and run this command:
 
 python setup.py install
+
+
+pip install simple-pid
